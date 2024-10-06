@@ -14,12 +14,11 @@ export const FetchRQ = () => {
   const queryClient = useQueryClient();
 
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ["posts", pageNumber], // useState
-    queryFn: () => fetchPosts(pageNumber), // useEffect
+    queryKey: ["posts", pageNumber],
+    queryFn: () => fetchPosts(pageNumber),
     placeholderData: keepPreviousData,
   });
 
-  //! mutation function to delete the post
   const deleteMutation = useMutation({
     mutationFn: (id) => deletePost(id),
     onSuccess: (data, id) => {
@@ -29,7 +28,6 @@ export const FetchRQ = () => {
     },
   });
 
-  // Conditional rendering based on loading, error, and posts data
   if (isPending) return <p>Loading...</p>;
   if (isError) return <p> Error: {error.message || "Something went wrong!"}</p>;
 
